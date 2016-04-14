@@ -65,7 +65,7 @@ def get_media_url(media_args):
         if yr is not None:
             year = yr.group(1)
 
-    year_suffix = "" if querytype == "dizi" else " " + year
+    year_suffix = "" if querytype == "dizi" else " (%s)" % year
 
     page = load_url('/index.php?page=arama&arama=%s' % title + year_suffix)
 
