@@ -111,7 +111,8 @@ def search(mitem):
             i = 0
             # /sub/s/281212/Hannibal.html
             log('Num links %s' % len(page.findAll('a')))
-            tb = page.find('table', attrs={'align': 'center'})
+            tables = page.findAll('table', attrs={'align': 'center'})
+            tb = [t for t in tables if 'FPS' in t.getText()][0]
             for link in tb.findAll('a', href=re.compile("/sub/s/.*./%s.html" % divpname)):
                 addr = link['href']
                 info = link.parent.parent.nextSibling.nextSibling.findAll("td", colspan="3")
@@ -173,7 +174,8 @@ def search(mitem):
         subtitles_list = []
         i = 0
         # /sub/s/281212/Hannibal.html
-        tb = page.find('table', attrs={'align': 'center'})
+        tables = page.findAll('table', attrs={'align': 'center'})
+        tb = [t for t in tables if 'FPS' in t.getText()][0]
         for link in tb.findAll('a', href=re.compile("/sub/s/.*./%s.html" % divpname)):
             addr = link.get('href')
             info = link.parent.parent.nextSibling.nextSibling.findAll("td", colspan="3")
