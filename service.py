@@ -65,20 +65,24 @@ def get_media_url(media_args):
         if yr is not None:
             year = yr.group(1)
 
-    page = load_url('/index.php?page=arama&arama=%s' % title)
+    year_suffix = "" if querytype == "dizi" else " " + year
+
+    page = load_url('/index.php?page=arama&arama=%s' % title + year_suffix)
 
     redirect_url = [sc.getText() for sc in page.findAll('script') if 'location.href' in sc.getText()]
     if len(redirect_url) > 0:
         a = redirect_url[0]
         episode_uri = a[a.find('"')+1:a.rfind('"')]
+        log('Found uri via redirect')
         return episode_uri
 
     for result in page.findAll('td', attrs={'width': '60%'}):
         link = result.find('a')
+        link_title = link.find('b').getText().strip()
         if querytype == "film":
             if str(year) == "" or str(year) in result.getText():
                 return link["href"]
-        elif querytype == "dizi" and "style" in result and "tv-shows" in result["style"]:
+        elif querytype == "dizi" and link_title.startswith('"'):
             if str(year) == "" or str(year) in result.getText():
                 return link["href"]
     raise ValueError('No valid results')
