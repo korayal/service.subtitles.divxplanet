@@ -4,6 +4,10 @@ Divxplanet Kodi Subtitle Addon
 This is an unofficial Kodi Subtitle Addon to be able to easily download subtitles from Divxplanet.com (Altyazi.org)
 
 #Changelog
+**0.1.1**
+* Set default encoding to utf8
+* Normalized file names before using them
+
 **0.1.0**
 * Upgraded versions for modules used in the addon
 * Replaced usage of `mechanize` with `requests` module for simpler scraping
