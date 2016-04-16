@@ -110,7 +110,6 @@ def search(mitem):
             subtitles_list = []
             i = 0
             # /sub/s/281212/Hannibal.html
-            log('Num links %s' % len(page.findAll('a')))
             tables = page.findAll('table', attrs={'align': 'center'})
             tb = [t for t in tables if 'FPS' in t.getText()][0]
             for link in tb.findAll('a', href=re.compile("/sub/s/.*./%s.html" % divpname)):
