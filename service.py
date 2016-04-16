@@ -8,7 +8,6 @@ import xbmcplugin
 from xbmc import log
 
 import os
-import sys
 import re
 import shutil
 import string
@@ -17,6 +16,9 @@ import requests
 from random import randint
 from time import sleep
 from BeautifulSoup import BeautifulSoup
+import sys
+reload(sys)  # Reload does the trick!
+sys.setdefaultencoding('UTF8')
 
 __addon__ = xbmcaddon.Addon()
 __author__ = __addon__.getAddonInfo('author')
@@ -37,6 +39,11 @@ if os.path.exists(__temp__):
 os.makedirs(__temp__)
 
 s = requests.Session()
+
+
+def normalize_filename(s):
+    valid_chars = '-_.() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    return ''.join([c for c in s if c in valid_chars])
 
 
 def load_url(path):
@@ -130,8 +137,11 @@ def search(mitem):
                     else:
                         language = "Turkish"
                         lan_short = "tr"
-                    filename = "%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short)
-                    description = info[1].getText().encode('utf8')
+                    filename = u"%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short)
+                    description = info[1].getText()
+                    log('description and filename:')
+                    log(description)
+                    log(filename)
                     l_item = xbmcgui.ListItem(
                             label=language,  # language name for the found subtitle
                             label2=description,  # file name for the found subtitle
@@ -148,7 +158,7 @@ def search(mitem):
                         __scriptid__,
                         addr,
                         lan_short,
-                        filename
+                        normalize_filename(filename)
                     )
 
                     xbmcplugin.addDirectoryItem(
@@ -191,10 +201,12 @@ def search(mitem):
                         lan_short = "tr"
                     description = "no-description"
                     if info[0].getText() != "":
-                        description = info[0].getText().encode('utf8')
+                        description = info[0].getText()
                     filename = "%s.%s" % (title, lan_short)
 
-                    log("Divxplanet: found a subtitle with description: %s" % description)
+                    log('description and filename:')
+                    log(description)
+                    log(filename)
 
                     l_item = xbmcgui.ListItem(
                             label=language,  # language name for the found subtitle
@@ -212,7 +224,7 @@ def search(mitem):
                         __scriptid__,
                         addr,
                         lan_short,
-                        filename
+                        normalize_filename(filename)
                     )
 
                     xbmcplugin.addDirectoryItem(
