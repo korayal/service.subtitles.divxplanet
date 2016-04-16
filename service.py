@@ -39,6 +39,11 @@ os.makedirs(__temp__)
 s = requests.Session()
 
 
+def normalize_filename(s):
+    valid_chars = '-_.() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    return ''.join([c for c in s if c in valid_chars])
+
+
 def load_url(path):
     # there is no need to be overenthusiastic
     sleep(randint(5, 25) / 10.0)
@@ -130,7 +135,7 @@ def search(mitem):
                     else:
                         language = "Turkish"
                         lan_short = "tr"
-                    filename = "%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short)
+                    filename = normalize_filename("%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short))
                     description = info[1].getText()
                     log('description and filename:')
                     log(description)
@@ -195,7 +200,7 @@ def search(mitem):
                     description = "no-description"
                     if info[0].getText() != "":
                         description = info[0].getText()
-                    filename = "%s.%s" % (title, lan_short)
+                    filename = normalize_filename("%s.%s" % (title, lan_short))
 
                     log('description and filename:')
                     log(description)
