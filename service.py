@@ -8,7 +8,6 @@ import xbmcplugin
 from xbmc import log
 
 import os
-import sys
 import re
 import shutil
 import string
@@ -17,6 +16,9 @@ import requests
 from random import randint
 from time import sleep
 from BeautifulSoup import BeautifulSoup
+import sys
+reload(sys)  # Reload does the trick!
+sys.setdefaultencoding('UTF8')
 
 __addon__ = xbmcaddon.Addon()
 __author__ = __addon__.getAddonInfo('author')
@@ -135,7 +137,7 @@ def search(mitem):
                     else:
                         language = "Turkish"
                         lan_short = "tr"
-                    filename = normalize_filename("%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short))
+                    filename = u"%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short)
                     description = info[1].getText()
                     log('description and filename:')
                     log(description)
@@ -156,7 +158,7 @@ def search(mitem):
                         __scriptid__,
                         addr,
                         lan_short,
-                        filename
+                        normalize_filename(filename)
                     )
 
                     xbmcplugin.addDirectoryItem(
@@ -200,7 +202,7 @@ def search(mitem):
                     description = "no-description"
                     if info[0].getText() != "":
                         description = info[0].getText()
-                    filename = normalize_filename("%s.%s" % (title, lan_short))
+                    filename = "%s.%s" % (title, lan_short)
 
                     log('description and filename:')
                     log(description)
@@ -222,7 +224,7 @@ def search(mitem):
                         __scriptid__,
                         addr,
                         lan_short,
-                        filename
+                        normalize_filename(filename)
                     )
 
                     xbmcplugin.addDirectoryItem(
