@@ -194,10 +194,12 @@ def search(mitem):
                         lan_short = "tr"
                     description = "no-description"
                     if info[0].getText() != "":
-                        description = info[0].getText().encode('utf8')
+                        description = info[0].getText()
                     filename = "%s.%s" % (title, lan_short)
 
-                    log("Divxplanet: found a subtitle with description: %s" % description)
+                    log('description and filename:')
+                    log(description)
+                    log(filename)
 
                     l_item = xbmcgui.ListItem(
                             label=language,  # language name for the found subtitle
