@@ -131,7 +131,10 @@ def search(mitem):
                         language = "Turkish"
                         lan_short = "tr"
                     filename = "%s S%02dE%02d %s.%s" % (tvshow, season, episode, title, lan_short)
-                    description = info[1].getText().encode('utf8')
+                    description = info[1].getText()
+                    log('description and filename:')
+                    log(description)
+                    log(filename)
                     l_item = xbmcgui.ListItem(
                             label=language,  # language name for the found subtitle
                             label2=description,  # file name for the found subtitle
