@@ -1,9 +1,15 @@
-Divxplanet Kodi Subtitle Addon
+PlanetDP Kodi Subtitle Addon
 ======================
 
-This is an unofficial Kodi Subtitle Addon to be able to easily download subtitles from Divxplanet.com (Altyazi.org)
+This is an unofficial Kodi Subtitle Addon to be able to easily download subtitles from planetdp.org
 
 #Changelog
+**0.2.0**
+* Since divxplanet.com / altyazi.org is powered down, plugin now is adapted for
+  PlanetDP.org which is it's successor
+* Added support to select the title when it's not possible to select the correct title
+* Added support for season packs
+
 **0.1.1**
 * Set default encoding to utf8
 * Normalized file names before using them
