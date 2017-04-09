@@ -1,3 +1,8 @@
+0.2.0
+- Since divxplanet.com / altyazi.org is powered down, plugin now is adapted for PlanetDP.org which is it's successor
+- Added support to select the title when it's not possible to select the correct title
+- Added support for season packs
+
 0.1.1
 - Set default encoding to utf8
 - Normalized file names before using them
