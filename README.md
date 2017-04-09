@@ -3,6 +3,7 @@ PlanetDP Kodi Subtitle Addon
 
 This is an unofficial Kodi Subtitle Addon to be able to easily download subtitles from planetdp.org
 
+
 #Changelog
 **0.2.0**
 * Since divxplanet.com / altyazi.org is powered down, plugin now is adapted for
